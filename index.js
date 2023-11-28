@@ -28,40 +28,44 @@ function init() {
             }
         ])
         .then((data) => {
-            switch (data.shape) {
-                case "circle":
-                    var shape = new Circle(
-                        data.shape,
-                        data.scolor,
-                        data.tcolor,
-                        data.text
-                    )
-                    var html = shape.createLogo()
-        
-                    fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
-                    break
-                case "triangle":
-                    var shape = new Triangle(
-                        data.shape,
-                        data.scolor,
-                        data.tcolor,
-                        data.text
-                    )
-                    var html = shape.createLogo()
-        
-                    fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
-                    break
-                case "square":
-                    var shape = new Square(
-                        data.shape,
-                        data.scolor,
-                        data.tcolor,
-                        data.text
-                    )
-                    var html = shape.createLogo()
-        
-                    fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
-                    break
+            if (data.text.length > 3) {
+                throw new Error("Text contains too many characters. Please try again.")
+            } else {
+                switch (data.shape) {
+                    case "circle":
+                        var shape = new Circle(
+                            data.shape,
+                            data.scolor,
+                            data.tcolor,
+                            data.text
+                        )
+                        var html = shape.createLogo()
+            
+                        fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+                        break
+                    case "triangle":
+                        var shape = new Triangle(
+                            data.shape,
+                            data.scolor,
+                            data.tcolor,
+                            data.text
+                        )
+                        var html = shape.createLogo()
+            
+                        fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+                        break
+                    case "square":
+                        var shape = new Square(
+                            data.shape,
+                            data.scolor,
+                            data.tcolor,
+                            data.text
+                        )
+                        var html = shape.createLogo()
+            
+                        fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+                        break
+                }
             }
         })
         .then(() => {
