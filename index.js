@@ -1,6 +1,6 @@
 const inquirer = require("inquirer")
 const fs = require("fs")
-const Shapes = require("./lib/shapes.js")
+const { Circle, Triangle, Square } = require("./lib/shapes.js")
 
 function init() {
     inquirer
@@ -19,7 +19,7 @@ function init() {
                 type: "list",
                 name: "shape",
                 message: "Please select a shape:",
-                choices: ["circle", "square", "triange"]
+                choices: ["circle", "square", "triangle"]
             },
             {
                 type: "input",
@@ -28,15 +28,41 @@ function init() {
             }
         ])
         .then((data) => {
-            const shape = new Shapes(
-                data.shape,
-                data.scolor,
-                data.tcolor,
-                data.text
-            )
-            const html = shape.render()
-
-            fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+            switch (data.shape) {
+                case "circle":
+                    var shape = new Circle(
+                        data.shape,
+                        data.scolor,
+                        data.tcolor,
+                        data.text
+                    )
+                    var html = shape.render()
+        
+                    fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+                    break
+                case "triangle":
+                    var shape = new Triangle(
+                        data.shape,
+                        data.scolor,
+                        data.tcolor,
+                        data.text
+                    )
+                    var html = shape.render()
+        
+                    fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+                    break
+                case "square":
+                    var shape = new Square(
+                        data.shape,
+                        data.scolor,
+                        data.tcolor,
+                        data.text
+                    )
+                    var html = shape.render()
+        
+                    fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
+                    break
+            }
         })
         .then(() => {
             console.log("Created logo.svg")
