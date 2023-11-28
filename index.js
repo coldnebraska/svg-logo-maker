@@ -1,5 +1,6 @@
 const inquirer = require("inquirer")
 const fs = require("fs")
+const Shapes = require("./lib/shapes.js")
 
 function init() {
     inquirer
@@ -27,25 +28,19 @@ function init() {
             }
         ])
         .then((data) => {
-            if (data.text.length > 3) {
-                console.log("Text contains too many characters. Please try again.")
-                init()
-            }
+            const shape = new Shapes(
+                data.shape,
+                data.scolor,
+                data.tcolor,
+                data.text
+            )
+            const html = shape.render()
 
-            writeToFile("logo.svg", data)
+            fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
         })
-}
-
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, 
-        `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-
-        <${data.shape} cx="150" cy="100" r="80" fill="${data.scolor}" />
-      
-        <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.tcolor}">${data.text}</text>
-      
-      </svg>`
-        , (err) => err ? console.log(err) : console.log("Generated logo.svg"))
+        .then(() => {
+            console.log("Created logo.svg")
+        })
 }
 
 init()
