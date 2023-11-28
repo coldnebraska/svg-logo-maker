@@ -36,7 +36,7 @@ function init() {
                         data.tcolor,
                         data.text
                     )
-                    var html = shape.render()
+                    var html = shape.createLogo()
         
                     fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
                     break
@@ -47,7 +47,7 @@ function init() {
                         data.tcolor,
                         data.text
                     )
-                    var html = shape.render()
+                    var html = shape.createLogo()
         
                     fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
                     break
@@ -58,7 +58,7 @@ function init() {
                         data.tcolor,
                         data.text
                     )
-                    var html = shape.render()
+                    var html = shape.createLogo()
         
                     fs.writeFile("logo.svg", html, (err) => err ? console.log(err) : console.log("File written"))
                     break
